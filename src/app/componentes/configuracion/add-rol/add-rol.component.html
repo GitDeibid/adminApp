@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Ingrese la información para el nuevo Rol:</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="formRol">
+      <div mat-dialog-content>
+        <b>Nombre el rol</b>
+        <div mat-form-field>            
+            <input placeholder="Ingrese el nombre del nuevo rol" formControlName="nombre_rol">                 
+        </div>          
+      </div>
+    </form>
+  
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="save_rol()">Guardar</button>
+    <button mat-button mat-dialog-close>Cancelar</button>
+  </div>

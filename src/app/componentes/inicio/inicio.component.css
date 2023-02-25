@@ -1,0 +1,19 @@
+.contenedor{
+    text-align: center;
+}
+
+.btnGrupo{
+    padding-top: 50px;
+}
+
+.boton{
+    padding: 5px;
+    margin-left: 20px;
+}
+
+
+.center_spb {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+  }
