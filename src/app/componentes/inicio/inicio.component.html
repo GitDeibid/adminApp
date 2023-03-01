@@ -13,7 +13,14 @@
             <button class="boton" mat-raised-button color = "accent" type="submit" (click)="Detener()">Detener</button>
             <!--<button class="boton" mat-raised-button color = "warn" type="submit" (click)="Mostrar()">Mostrar resultados</button>-->
               
-        </div><br><br><br>
+        </div>
+        <br><br>
+        <div>
+            <span>
+                {{progreso}}/100
+            </span>
+        </div>
+        <br><br><br>
         <div id="spinner" style="display: none;">
             <div  class="center_spb" >
                 <mat-spinner></mat-spinner>

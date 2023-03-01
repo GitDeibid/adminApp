@@ -37,7 +37,7 @@
     </div>
     <br>
     <div>
-      <span>Cargando...</span>
+      <button mat-raised-button (click)="exportToExcel()">Exportar a Excel</button>
       <table mat-table [dataSource]="results" class="mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.
@@ -70,11 +70,12 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         
+        
       </table>
-      <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]">
+      <mat-paginator
+              [pageSizeOptions]="[15,30,50]" showFirstLastButtons>
       </mat-paginator>
+      
     </div>
     <div class="drig"></div>
     <!--
