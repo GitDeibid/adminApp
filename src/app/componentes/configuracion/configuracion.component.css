@@ -1,0 +1,12 @@
+.mat-select-value{
+    color: red;
+}
+
+.contenedor{
+    background-color: gray;
+}
+
+.tablas{
+    display: flex;
+    justify-content: space-around;
+}

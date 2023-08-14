@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dispositivos</title>
+</head>
+<body>
+  <div class="contenedor">
+    <div>      
+      <table mat-table [dataSource]="dataB" class="mat-elevation-z8">
+
+        <!-- Checkbox Column 
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selectionB.hasValue() && isAllSelected()"
+                          [indeterminate]="selectionB.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selectionB.toggle(row) : null"
+                          [checked]="selectionB.isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        -->
+        <!-- Name Column -->
+        <ng-container matColumnDef="MAC">
+          <th mat-header-cell *matHeaderCellDef> MAC </th>
+          <td mat-cell *matCellDef="let element"> {{element.MAC}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="Nombre">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.Nombre}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsB"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsB;"
+            (click)="selectionB.toggle(row)">
+        </tr>
+      </table>
+
+      <br>
+      <div style="background-color: rgb(116, 116, 116);">
+        <form class="addBeacon-Form" [formGroup]="formB" (ngSubmit)="addB()">
+          <mat-form-field class="example-full-width">
+            <mat-label class="addLabel">MAC Beacon</mat-label>
+            <input class="form-control" placeholder="Ingrese una MAC" formControlName="macb" matInput>
+          </mat-form-field>
+        
+          <mat-form-field class="example-full-width">
+            <mat-label class="addLabel">Nombre Beacon</mat-label>
+            <input class="form-control" placeholder="Ingrese un nombre" formControlName="nameb" matInput>
+          </mat-form-field>
+          <button type="submit">Agregar Beacon</button>
+        </form>
+        
+        
+        
+      </div>
+    </div>
+    <br><br>
+    <div>      
+      <table mat-table [dataSource]="dataP" class="mat-elevation-z8">
+        <!--
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selectionP.hasValue() && isAllSelected()"
+                          [indeterminate]="selectionP.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selectionP.toggle(row) : null"
+                          [checked]="selectionP.isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+      -->
+
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+      
+
+        <ng-container matColumnDef="MAC">
+          <th mat-header-cell *matHeaderCellDef> MAC </th>
+          <td mat-cell *matCellDef="let element"> {{element.MAC}} </td>
+        </ng-container>
+      
+
+        <ng-container matColumnDef="Rol">
+          <th mat-header-cell *matHeaderCellDef> Rol </th>
+          <td mat-cell *matCellDef="let element"> {{element.Rol}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsP"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsP;"
+            (click)="selectionP.toggle(row)">
+        </tr>
+      </table>
+      <br>
+      <div style="background-color: rgb(116, 116, 116);">
+        <form class="addParticipante-Form" [formGroup]="formP" (ngSubmit)="addP()">
+          <mat-form-field class="example-full-width">
+            <mat-label class="addLabel">MAC Participante</mat-label>
+            <input class="form-control" placeholder="Ingrese una MAC" formControlName="macp" matInput>
+          </mat-form-field>
+          <!--
+          <mat-form-field class="example-full-width">
+            <mat-label class="addLabel">Rol Participante</mat-label>
+            <input class="form-control" placeholder="Ingrese un rol" formControlName="rolp" matInput>
+          </mat-form-field>
+-->
+          <mat-form-field>
+            <mat-select style="color:brown;"placeholder="Seleccione un rol" formControlName="rolp" >
+              <mat-option *ngFor="let food of Roles" [value]="food.Nombre">
+                {{food.Nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button type="submit">Agregar Participante</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

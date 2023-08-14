@@ -1,0 +1,18 @@
+table {
+    margin-top: 30px;
+    width: 100%;
+  }
+
+.addLabel{
+  color: rgba(179, 7, 7, 0.7);
+}
+
+.contenedor{
+  display: grid;
+  /*justify-content: center;*/
+  place-content: center;
+}
+
+.mat-select-value{
+  color: #f00;
+}

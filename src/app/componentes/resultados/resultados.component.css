@@ -1,0 +1,9 @@
+table {
+  margin-top: 30px;
+  width: 100%;
+  }
+
+.contenedor-tabla{
+  display: grid;
+  place-content: center;
+}

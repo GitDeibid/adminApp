@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="btnGrupo">
+            <button class="boton" mat-raised-button color = "primary" type="submit" (click)="Escanear()" [disabled]="false">Iniciar</button>
+            <button class="boton" mat-raised-button color = "accent" type="submit" (click)="Detener()">Detener</button>
+            <!--<button class="boton" mat-raised-button color = "warn" type="submit" (click)="Mostrar()">Mostrar resultados</button>-->
+              
+        </div>
+        <br><br>
+        <div>
+            <span>
+                {{progreso}}/100
+            </span>
+        </div>
+        <br><br><br>
+        <div id="spinner" style="display: none;">
+            <div  class="center_spb" >
+                <mat-spinner></mat-spinner>
+            </div>
+        </div>
+        
+    </div>
+    
+</body>
+</html>
+
+
+

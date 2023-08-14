@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+</head>
+<body>
+  <form [formGroup]="formR" (ngSubmit)="Registrar()">
+    <div class="container">
+      <div class="card text-center">
+          <div class="card-header">
+            <b>Registrarse</b>
+          </div>
+          <div class="card-body">
+              <label>Email</label>
+            <input class="form-control" type="email" placeholder="Ingrese su email" formControlName="correo"> 
+              <label>Ingrese Contraseña</label>
+            <input class="form-control" type="password" placeholder="Ingrese su contraseña" formControlName="pass">
+            <br>
+            <label>Repita Contraseña</label>
+            <input class="form-control" type="password" placeholder="Repita su contraseña" formControlName="pass2">
+            <br>
+            <input type="submit" value="Enviar">
+            <br>
+            <br>                   
+          </div>
+          
+        </div>
+      </div>
+  </form>
+  
+</body>
+</html>
