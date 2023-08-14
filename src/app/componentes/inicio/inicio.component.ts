@@ -34,6 +34,7 @@ export class InicioComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this.com.btn_visible=true;
     this.obtenerConfig();
     //this.tiempo = parseInt(this.settings.duracionIns)*60000;  
   }
@@ -46,9 +47,16 @@ export class InicioComponent implements OnInit {
 
   Escanear(){
     console.log("Iniciar escaner");
-    this.service.runEscaner();
-    this.mostrar();
-    setTimeout(this.ocultar,this.tiempo);   
+    this.service.getTiming().subscribe(t=>{
+      this.settings=t as sett
+      var time = parseInt(this.settings.duracionIns,10);
+      console.log(time*60000);
+      this.tiempo=time*60000
+      this.service.runEscaner();
+      this.mostrar();
+      setTimeout(this.ocultar,this.tiempo);   
+    });
+      
 
   }
 
@@ -62,7 +70,7 @@ export class InicioComponent implements OnInit {
   obtenerConfig(){
     this.service.getTiming().subscribe(t=>{
       this.settings=t as sett      
-      //console.log(this.settings.duracionIns);  
+      console.log(this.settings.duracionIns);  
     });
     
   }
@@ -77,6 +85,7 @@ export class InicioComponent implements OnInit {
         this.progreso=100;
         console.log(this.progreso);
         clearInterval(this.exe);
+        this.service.stopEscaner();
       }
     },(this.tiempo)/100);
   }

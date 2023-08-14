@@ -29,6 +29,7 @@ export class ConfigServiceService {
   }
   
   getIns():Observable<Ins[]>{
+
     return this.Ins;
   }
 
@@ -64,6 +65,23 @@ export class ConfigServiceService {
 
   setRoles(nombre:String){
     return this.fs.collection('roles').doc(undefined).set({Nombre:nombre});
+  }
+
+  deleteRol(id:string){
+    let docId="";
+    return this.fs.collection('roles', ref=>ref.where('Nombre','==',id)).get().subscribe(qS=>{
+      qS.forEach(doc=>{
+        docId=doc.id;
+        //console.log(docId);
+        this.fs.collection('roles').doc(docId).delete().then(()=>{
+          console.log("Elemto eliminado");
+        }).catch((err)=>{
+          console.error('Error al borrar', err);
+        })
+      })
+    })
+    
+     
   }
 
 }

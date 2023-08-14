@@ -19,7 +19,9 @@
             <label>Contraseña</label>
           <input class="form-control" type="password" placeholder="Ingrese su contraseña" formControlName="pass">
           <br>
-          <input type="submit" value="Enviar" class="btn btn-primary">
+          <div>
+            <input style="margin-right:20px;" type="submit" value="Enviar" class="btn btn-primary"> <button style="margin-left:20px;" class="btn btn-danger" (click)="googleLog()">Iniciar con Google</button>
+          </div>          
           <br>
           <br>                   
         </div>          

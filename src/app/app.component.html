@@ -8,17 +8,18 @@
     <title>Document</title>
 </head>
 <body>
-    <mat-sidenav-container>
-        <mat-sidenav [(opened)]="navAbierto">
+    <mat-sidenav-container >
+        <mat-sidenav [(opened)]="navAbierto" mode="side">
             <ul class="ListaMenu">
                 <li class="itemMenu"><a routerLink="/inicio" routerLinkActive="active" ariaCurrentWhenActive="page">Inicio</a></li>
                 <li class="itemMenu"><a routerLink="/config" routerLinkActive="active" ariaCurrentWhenActive="page">Configuración Scanner</a></li>
                 <li class="itemMenu"><a routerLink="/result" routerLinkActive="active" ariaCurrentWhenActive="page">Resultados</a></li>
                 <li class="itemMenu"><a routerLink="/disp" routerLinkActive="active" ariaCurrentWhenActive="page">Añadir Dispositivos</a></li>
-                <li class="itemMenu"><button class="btn btn-danger" (click)="Logout()">Cerrar Sesión</button></li>
+                <!--<li class="itemMenu"><button class="btn btn-danger" (click)="Logout()">Cerrar Sesión</button></li>-->
             </ul>
         </mat-sidenav>
-        <mat-sidenav-content><button (click)="navAbierto=!navAbierto"><fa-icon [icon]="faBars"></fa-icon></button><router-outlet></router-outlet></mat-sidenav-content>
+        <!--<mat-sidenav-content><button (click)="toggleSidenav()"><fa-icon [icon]="faBars"></fa-icon></button><router-outlet></router-outlet></mat-sidenav-content>-->
+        <mat-sidenav-content><router-outlet></router-outlet></mat-sidenav-content>
       </mat-sidenav-container>    
 
 </body>

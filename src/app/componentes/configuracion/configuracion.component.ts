@@ -30,7 +30,7 @@ export class ConfiguracionComponent implements OnInit {
   ffNombre!:String;
   dIns!:String;
   selecColeccion!:string;
-  tEscanerOptions:string[] = ['10','15','20','25','30']
+  tEscanerOptions:string[] = ['10','30','50','90']//Parámetros entregados en segundos multiplicado spor 1000 en la app.
   fEscanerOptions:string[] = ['1','2','3','4','5']
   dInsOptions:string[] = ['5','10','15','20']
   ddlColection!:Ins[]
@@ -38,7 +38,13 @@ export class ConfiguracionComponent implements OnInit {
   faIcon1=faSquarePlus;
   dia: any;
 
-  displayedColumnsRol: string[] = ['Nombre'];
+  //confgi actual
+  dur_escan_conf!:string;
+  frec_conf!:string;
+  coleccion_conf!:string;
+  duracion_conf!:string;
+  //
+  displayedColumnsRol: string[] = ['Nombre','Acciones'];
   displayedColumnsIns: string[] = ['Nombre'];
 
   dataR!:MatTableDataSource<any>;
@@ -59,7 +65,7 @@ export class ConfiguracionComponent implements OnInit {
   ngOnInit() {
 
     this.config.getIns().subscribe(inst=>{//Obtiene el valor de la configuración al momento de cambiar en firestore.
-      //console.log(inst);
+      console.log(inst);
       this.ddlColection = inst;
       /*for (let index = 0; index < this.ddlColection.length; index++) {
         this.prueba=this.ddlColection[index];
@@ -68,7 +74,7 @@ export class ConfiguracionComponent implements OnInit {
     })
 
     this.config.getRoles().subscribe(r=>{
-      console.log(r as participante[]);
+      //console.log(r as participante[]);
       this.dataR= new MatTableDataSource<rol>(r as rol[]);      
     })
 
@@ -76,13 +82,22 @@ export class ConfiguracionComponent implements OnInit {
       this.dataI= new MatTableDataSource<Ins>(b);      
       
     })
+
+    this.config.getConfig().subscribe(c=>{
+      this.dur_escan_conf=c.payload.data()['duracionScaner'];
+      this.frec_conf=c.payload.data()['frequency'];
+      this.coleccion_conf=c.payload.data()['nombre'];
+      this.duracion_conf=c.payload.data()['duracionIns'];
+
+      console.log(c.payload.data()['duracionScaner']);
+    })
   }
 
   Actualizar(){
-    console.log(this.tEscaner,this.fEscaner, this.selecColeccion);
+    //console.log(this.tEscaner,this.fEscaner, this.selecColeccion);
     this.config.setConfig(this.tEscaner,this.fEscaner, this.selecColeccion,this.dIns);
     this.config.getConfig().subscribe(data=>{//Obtiene el valor de la configuración al momento de cambiar en firestore.
-      console.log(data.payload.data()['duracionScaner']);
+      //console.log(data.payload.data()['duracionScaner']);
     })
     
   }
@@ -94,5 +109,9 @@ export class ConfiguracionComponent implements OnInit {
 
   choseRol(){
     this.dia.open(AddRolComponent);
+  }
+
+  Borrar(ID:string){
+    this.config.deleteRol(ID);
   }
 }
