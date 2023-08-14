@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideAuth,getAuth,Auth } from '@angular/fire/auth';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { LoginComponent } from './componentes/login/login.component';
@@ -23,7 +23,9 @@ import { MatInputModule} from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner' 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 //----------------------------
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -34,6 +36,7 @@ import { AddExperimentoComponent } from './componentes/configuracion/add-experim
 import { AddRolComponent } from './componentes/configuracion/add-rol/add-rol.component';
 import { ResultadosComponent } from './componentes/resultados/resultados.component';
 import { DispositivosComponent } from './componentes/dispositivos/dispositivos.component';
+
 
 @NgModule({
   declarations: [	
@@ -69,7 +72,9 @@ import { DispositivosComponent } from './componentes/dispositivos/dispositivos.c
     MatCardModule,
     MatIconModule,
     MatPaginatorModule,
-    MatProgressSpinnerModule    
+    MatProgressSpinnerModule,
+    MatDividerModule,
+    MatProgressBarModule
   ],
   providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],//También se debe añadir esta sección.
   bootstrap: [AppComponent]

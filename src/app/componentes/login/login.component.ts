@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PrincipalServicesService } from 'src/app/servicios/principalServices.service';
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }  
 
   Login(){
@@ -32,11 +34,19 @@ export class LoginComponent implements OnInit {
     .then(resp =>{
       console.log(resp);//Respuesta en caso de ser favorable
       this.router.navigate(['/inicio']);
+      
     })
     .catch(err=>{
       console.log(err);
       console.log("La autenticación ha fallado.")
     })//respuesta en caso de no ser favorable.
+  }
+
+  googleLog(){
+    this.servicio.logGoogle().then(resp=>{
+      console.log(resp);
+      this.router.navigate(['/inicio']);
+    }).catch(error=>console.log(error))
   }
 
 }

@@ -11,14 +11,22 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 })
 export class AppComponent {
   title = 'adminApp';
-  navAbierto = false;
+  navAbierto = true;
   faBars=faBars;
   constructor(private service:PrincipalServicesService, private router:Router){
-
+  
   }
+
+  ngOnInit(){
+  }
+  toggleSidenav(){
+    this.navAbierto = !this.navAbierto;
+  }
+
   Logout(){
     this.service.logout().then(()=>{
       this.router.navigate(['/login']);
     }).catch(err=>console.log(err));
+
   }
 }

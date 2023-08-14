@@ -5,3 +5,8 @@
 .contenedor{
     background-color: gray;
 }
+
+.tablas{
+    display: flex;
+    justify-content: space-around;
+}

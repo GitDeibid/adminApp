@@ -14,8 +14,9 @@ const routes: Routes = [
   {path:'registro',component:RegistroComponent},
   {path: 'config',component:ConfiguracionComponent},
   {path:'disp',component:DispositivosComponent},
-  {path:'result',component:ResultadosComponent}, 
-  {path:'inicio',component:InicioComponent,...canActivate(()=>redirectUnauthorizedTo(['/login']))}//Si el usuario no está autorizado, entonces seremos redireccionados a login.
+  {path:'result',component:ResultadosComponent},
+  {path:'inicio',component:InicioComponent}
+  //{path:'inicio',component:InicioComponent,...canActivate(()=>redirectUnauthorizedTo(['/login']))}//Si el usuario no está autorizado, entonces seremos redireccionados a login.
 
 ];
 
