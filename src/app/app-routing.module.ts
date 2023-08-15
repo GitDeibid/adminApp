@@ -7,6 +7,7 @@ import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';/
 import { ConfiguracionComponent } from './componentes/configuracion/configuracion.component';
 import { ResultadosComponent } from './componentes/resultados/resultados.component';
 import { DispositivosComponent } from './componentes/dispositivos/dispositivos.component';
+import { GraficosComponent } from './componentes/graficos/graficos.component';
 
 const routes: Routes = [
   {path:'',pathMatch:'full',redirectTo:'/inicio'},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'config',component:ConfiguracionComponent},
   {path:'disp',component:DispositivosComponent},
   {path:'result',component:ResultadosComponent},
-  {path:'inicio',component:InicioComponent}
+  {path:'inicio',component:InicioComponent},
+  {path:'graf',component:GraficosComponent}
   //{path:'inicio',component:InicioComponent,...canActivate(()=>redirectUnauthorizedTo(['/login']))}//Si el usuario no está autorizado, entonces seremos redireccionados a login.
 
 ];

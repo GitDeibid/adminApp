@@ -1,3 +1,16 @@
-<p>
-  graficos works!
-</p>
+<div>
+  <ngx-charts-bar-horizontal-stacked
+  [view]="view"
+  scheme="fire"
+  [results]="multi"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  (select)="onSelect($event)">
+</ngx-charts-bar-horizontal-stacked>
+</div>

@@ -37,7 +37,11 @@
     </div>
     <br>
     <div>
-      <button mat-raised-button (click)="exportToExcel()">Exportar a Excel</button>
+      <div class="container">
+        <button mat-raised-button (click)="exportToExcel()">Exportar a Excel</button>
+        <button mat-raised-button routerLink="/graf">Visualizar</button>
+      </div>
+      
       <table mat-table [dataSource]="results" class="mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.

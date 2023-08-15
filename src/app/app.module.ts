@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+//General modules
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -9,6 +10,8 @@ import { provideAuth,getAuth,Auth } from '@angular/fire/auth';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { LoginComponent } from './componentes/login/login.component';
+//NGX chart module
+import { NgxChartsModule } from '@swimlane/ngx-charts'; 
 //Angular Material modules.
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +39,7 @@ import { AddExperimentoComponent } from './componentes/configuracion/add-experim
 import { AddRolComponent } from './componentes/configuracion/add-rol/add-rol.component';
 import { ResultadosComponent } from './componentes/resultados/resultados.component';
 import { DispositivosComponent } from './componentes/dispositivos/dispositivos.component';
+import { GraficosComponent } from './componentes/graficos/graficos.component';
 
 
 @NgModule({
@@ -48,6 +52,7 @@ import { DispositivosComponent } from './componentes/dispositivos/dispositivos.c
     AddExperimentoComponent,
     ResultadosComponent,
     DispositivosComponent,
+    GraficosComponent,
     AddRolComponent
    ],
    entryComponents:[AddExperimentoComponent],
@@ -74,7 +79,8 @@ import { DispositivosComponent } from './componentes/dispositivos/dispositivos.c
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatDividerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    NgxChartsModule
   ],
   providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],//También se debe añadir esta sección.
   bootstrap: [AppComponent]
