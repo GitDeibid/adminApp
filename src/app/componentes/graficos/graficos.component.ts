@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { multi } from './data';
+import { ConfigServiceService } from 'src/app/servicios/config-service.service';
 
 @Component({
   selector: 'app-graficos',
@@ -25,11 +26,17 @@ export class GraficosComponent implements OnInit {
     domain: ['#5AA454', '#C7B42C', '#AAAAAA']
   };
 
-  constructor() {
+  constructor( public sdata:ConfigServiceService) {
     Object.assign(this, { multi });
+
+
   }
 
   ngOnInit(): void {
+    
+    this.sdata.getResultados('7e2f4e31bb6da08b','PruebaSprint2-DIICC200623').subscribe(r=>{
+      console.log(r[0]);
+    });//agregar manualmente los parámetros.
     
   }
 
