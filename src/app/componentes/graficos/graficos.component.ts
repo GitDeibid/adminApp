@@ -11,8 +11,8 @@ import { sort } from 'd3';
 export class GraficosComponent implements OnInit {
 
   multi!:any[];
-  view: [number,number] = [1200, 600];
-
+  view: [number,number] = [1200, 100];
+  data_g:any=[];
   // options
   showXAxis: boolean = true;
   showYAxis: boolean = true;
@@ -38,7 +38,9 @@ export class GraficosComponent implements OnInit {
     this.sdata.getResultados('7e2f4e31bb6da08b','PruebaSprint2-DIICC200623').subscribe(r=>{
       console.log(r[0]);
       var arr=[];
-      var sort_arr=[];
+      
+      var serie=[];
+      var tiempo_acum=0;      
 
       function parseDatetime(datetimeString:string) {
         const [datePart, timePart] = datetimeString.split(' ');
@@ -71,7 +73,29 @@ export class GraficosComponent implements OnInit {
         var dtB:number=b[1];
         return dtA-dtB;
       });
+
       console.log(arr);
+      //Recorrer arreglo y acumular el tiempo que estuvo el dispositivo en cada estación.
+      for (let index = 0; index < arr.length-1; index++) {
+        let lec_actual = arr[index];
+        let lec_siguiente = arr[index+1];
+        
+        tiempo_acum += lec_siguiente[1]-lec_actual[1];
+        if (lec_actual[0] != lec_siguiente[0]){
+          if(tiempo_acum>=20){
+              //Añadir serie.
+            let name = lec_actual[0];
+            let value = tiempo_acum;
+            serie.push({"name":name,"value":value});
+            tiempo_acum = 0//Reestablecer valor del acumulador de tiempo
+          }
+          tiempo_acum = 0//Reestablecer valor del acumulador de tiempo          
+        }
+      }
+      //Crear data:
+      this.data_g.push({"name":arr[0][2],"series":serie});
+      this.data_g=[...this.data_g];
+      console.log(this.data_g);
     });//agregar manualmente los parámetros.
     
   }
