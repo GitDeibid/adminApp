@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Ingrese la información para el nuevo experimento:</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formEdit">
+    <div mat-dialog-content>
+      <b>Editando</b>
+      <div mat-form-field>
+          <label for="">Editando elemento: </label>            
+                         
+      </div>          
+    </div>
+    <br><br>
+    <div mat-dialog-content>
+      <b>Nombre / Rol</b>
+      <div mat-form-field>            
+          <input placeholder="Ingrese el nombre del dispositivo" formControlName="nombre">                 
+      </div>          
+    </div>
+  </form>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="save_changes()">Guardar</button>
+  <button mat-button mat-dialog-close>Cancelar</button>
+</div>

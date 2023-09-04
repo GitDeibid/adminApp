@@ -5,7 +5,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import { beacon } from '../../models/beacon';
 import { participante } from '../../models/participante';
 import { FormControl, FormGroup } from '@angular/forms';
-
+import { MatDialog } from '@angular/material/dialog';
+import { EditElementComponent } from './edit-element/edit-element.component';
 
 export interface ROL {
   Nombre: string;
@@ -35,14 +36,16 @@ export interface ROL {
 })
 export class DispositivosComponent implements OnInit {
 
+  popUpEdit:any;
+
   formB!:FormGroup;
   formP!:FormGroup;
   selectedRol!:string;
   Roles:ROL[] = [{Nombre:"-"}];
 
   //displayedColumns: string[] = ['select', 'MAC', 'Nombre']; descomentar para incluir casillas de selección por fila.
-  displayedColumnsB: string[] = [ 'MAC', 'Nombre'];
-  displayedColumnsP: string[] = [ 'MAC', 'Rol'];
+  displayedColumnsB: string[] = [ 'MAC', 'Nombre','Acciones'];
+  displayedColumnsP: string[] = [ 'Identificador', 'Rol','Acciones'];
   //dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   //selection = new SelectionModel<PeriodicElement>(true, []);
   
@@ -68,7 +71,7 @@ export class DispositivosComponent implements OnInit {
   }
 
 
-  constructor(public rdata:ConfigServiceService) { 
+  constructor(public rdata:ConfigServiceService, popUp:MatDialog) { 
 
     this.formB = new FormGroup({
       macb: new FormControl(),
@@ -79,12 +82,14 @@ export class DispositivosComponent implements OnInit {
       macp: new FormControl(),
       rolp: new FormControl()
     })
+
+    this.popUpEdit=popUp;
   }
 
   ngOnInit() {
     this.rdata.getBeacon().subscribe(bal=>{//Obtiene el valor de la configuración al momento de cambiar en firestore.
       this.balizas = bal;
-      console.log(bal);
+      //console.log(bal);
       this.dataB= new MatTableDataSource<beacon>(this.balizas);
       this.selectionB = new SelectionModel<beacon>(true, []);
       /*for (let index = 0; index < this.ddlColection.length; index++) {
@@ -111,6 +116,15 @@ export class DispositivosComponent implements OnInit {
   addP(){
     console.log(this.formP.value);
     this.rdata.setParticipante(this.formP.value);
+  }
+
+  editB(id:string){
+    this.popUpEdit.open(EditElementComponent);
+    console.log(id);
+    
+  }
+  editP(id:string){
+    console.log(id);
   }
 
 }

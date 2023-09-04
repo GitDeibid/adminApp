@@ -60,7 +60,7 @@ export class ResultadosComponent implements OnInit,AfterViewInit {
     this.rdata.getParticipante().subscribe(r=>{//Obtiene el valor de la configuración al momento de cambiar en firestore.
       //console.log(typeof(r));
       this.roles=r as participante[];
-      //console.log(this.roles[0]);
+      console.log(this.roles[0]);
       /*for (let index = 0; index < this.ddlColection.length; index++) {
         this.prueba=this.ddlColection[index];
         console.log(this.prueba.Nombre);
@@ -69,11 +69,14 @@ export class ResultadosComponent implements OnInit,AfterViewInit {
     this.rdata.getIns().subscribe(i=>{//Obtiene el valor de la configuración al momento de cambiar en firestore.
       //console.log(typeof(i));
       this.instancias=i as instancia[];
-      //console.log(this.instancias[0]);
+      console.log(this.instancias[0]);
       /*for (let index = 0; index < this.ddlColection.length; index++) {
         this.prueba=this.ddlColection[index];
         console.log(this.prueba.Nombre);
       }*/
+    })
+    this.rdata.getRoles().subscribe(j=>{
+      console.log(j);
     })
   }
 

@@ -35,6 +35,17 @@ export class GraficosComponent implements OnInit {
 
   ngOnInit(): void {
     
+    this.sdata.getIns().subscribe(d=>{
+
+      console.log(d);
+    })
+
+    this.sdata.getParticipante().subscribe(p=>{
+
+      console.log(p);
+    })
+
+
     this.sdata.getResultados('7e2f4e31bb6da08b','PruebaSprint2-DIICC200623').subscribe(r=>{
       console.log(r[0]);
       var arr=[];

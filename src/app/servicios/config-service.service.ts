@@ -74,7 +74,7 @@ export class ConfigServiceService {
         docId=doc.id;
         //console.log(docId);
         this.fs.collection('roles').doc(docId).delete().then(()=>{
-          console.log("Elemto eliminado");
+          console.log("Elemto eliminado");          
         }).catch((err)=>{
           console.error('Error al borrar', err);
         })
@@ -82,6 +82,43 @@ export class ConfigServiceService {
     })
     
      
+  }
+
+  deleteIns(id:string){
+    let docId="";
+    return this.fs.collection('instancias', ref=>ref.where('Nombre','==',id)).get().subscribe(dI=>{
+      dI.forEach(doc=>{
+        docId=doc.id;
+        //console.log(docId);
+        this.fs.collection('instancias').doc(docId).delete().then(()=>{
+          console.log("Elemento eliminado");
+        }).catch((err)=>{
+          console.error('Error al borrar', err);
+        })
+      })
+    })
+  }
+
+  deleteParticipante(id:string){
+    let docId="";
+    return this.fs.collection('participantes',e=>e.where('Rol','==',id)).get().subscribe(qP=>{
+      qP.forEach(p=>{
+        docId=p.id;
+        this.fs.collection('participantes').doc(docId).delete().then(()=>{
+          console.log('Participante eliminado');
+        
+        }).catch((err)=>{
+          console.log('No se pudo eliminar..',err)
+        })
+      })
+    })
+  }
+
+  editElement(id:string,elemt:number){
+    let docId="";
+
+    
+
   }
 
 }

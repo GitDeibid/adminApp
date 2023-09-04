@@ -1,10 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ConfigServiceService } from 'src/app/servicios/config-service.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import { Ins } from '../../models/experimento';
-import { participante } from '../../models/participante'
 import { MatDialog } from '@angular/material/dialog';
 import { AddExperimentoComponent } from './add-experimento/add-experimento.component';
 import { AddRolComponent } from './add-rol/add-rol.component';
@@ -45,7 +43,7 @@ export class ConfiguracionComponent implements OnInit {
   duracion_conf!:string;
   //
   displayedColumnsRol: string[] = ['Nombre','Acciones'];
-  displayedColumnsIns: string[] = ['Nombre'];
+  displayedColumnsIns: string[] = ['Nombre','Acciones'];
 
   dataR!:MatTableDataSource<any>;
   dataI!:MatTableDataSource<any>;
@@ -90,7 +88,7 @@ export class ConfiguracionComponent implements OnInit {
       this.duracion_conf=c.payload.data()['duracionIns'];
 
       console.log(c.payload.data()['duracionScaner']);
-    })
+    })   
   }
 
   Actualizar(){
@@ -111,7 +109,18 @@ export class ConfiguracionComponent implements OnInit {
     this.dia.open(AddRolComponent);
   }
 
-  Borrar(ID:string){
-    this.config.deleteRol(ID);
+  BorrarRol(ID:string){
+    if(confirm("¿Desea borar este rol? Su información será borrada y no podrá consultar por sus datos.")){
+      this.config.deleteRol(ID);
+      this.config.deleteParticipante(ID);
+    }
+
+    
+  }
+  BorrarIns(ID:string){
+    if(confirm("¿Desea borrar la instancia?")){
+      this.config.deleteIns(ID);
+    }
+    
   }
 }
