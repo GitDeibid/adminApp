@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { multi } from './data';
 import { ConfigServiceService } from 'src/app/servicios/config-service.service';
-import { sort } from 'd3';
+import { count, sort } from 'd3';
+import {participante} from '../../models/participante'
+import { switchMap } from 'rxjs';
+import { Ins } from 'src/app/models/experimento';
 
 @Component({
   selector: 'app-graficos',
@@ -9,6 +12,9 @@ import { sort } from 'd3';
   styleUrls: ['./graficos.component.css']
 })
 export class GraficosComponent implements OnInit {
+
+  par!:participante[]
+  ins!:any
 
   multi!:any[];
   view: [number,number] = [1200, 100];
@@ -36,16 +42,29 @@ export class GraficosComponent implements OnInit {
   ngOnInit(): void {
     
     this.sdata.getIns().subscribe(d=>{
-
+      console.log("Instancias: ");
       console.log(d);
+      this.ins=d;
     })
-
+/* 
     this.sdata.getParticipante().subscribe(p=>{
-
+      console.log("Participantes: ");
       console.log(p);
+      this.par=p;
+    }) */
+
+    this.sdata.getIns().pipe(
+      switchMap(insRes => {
+        console.log(insRes)
+        this.ins=insRes;
+        return this.sdata.getParticipante();
+      })
+    ).subscribe(par=>{
+
+      this.getData(par, this.ins[4]);//Una instancia en particular.
     })
 
-
+    //this.getData(this.par,this.ins);
     this.sdata.getResultados('7e2f4e31bb6da08b','PruebaSprint2-DIICC200623').subscribe(r=>{
       console.log(r[0]);
       var arr=[];
@@ -74,11 +93,6 @@ export class GraficosComponent implements OnInit {
 
       }
 
-      /* arr.sort((a,b)=>{
-        var dtA:any=parseDatetime(a[1]);
-        var dtB:any=parseDatetime(b[1]);
-        return dtA-dtB;
-      }); */
       arr.sort((a,b)=>{//Orden de menor a mayor de tiempo en segundos.
         var dtA:number=a[1];
         var dtB:number=b[1];
@@ -107,12 +121,27 @@ export class GraficosComponent implements OnInit {
       this.data_g.push({"name":arr[0][2],"series":serie});
       this.data_g=[...this.data_g];
       console.log(this.data_g);
-    });//agregar manualmente los parámetros.
+    });//agregar manualmente los parámetros. */
     
   }
 
   onSelect(data:any) {
-    console.log(data);
+    //console.log(data);
+  }
+
+  makeChart(){
+    
+  }
+
+  getData(participantes:participante[],instancia:Ins){
+    //console.log(participantes);
+    console.log(instancia);
+    for (const participante of participantes) {
+      this.sdata.getResultados(participante.MAC!!,instancia.Nombre!!.toString()).subscribe(async r=>{
+        console.log(r[0]);
+      })
+      
+    }
   }
 
   

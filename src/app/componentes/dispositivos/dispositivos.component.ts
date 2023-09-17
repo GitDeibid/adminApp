@@ -6,7 +6,6 @@ import { beacon } from '../../models/beacon';
 import { participante } from '../../models/participante';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { EditElementComponent } from './edit-element/edit-element.component';
 
 export interface ROL {
   Nombre: string;
@@ -45,7 +44,7 @@ export class DispositivosComponent implements OnInit {
 
   //displayedColumns: string[] = ['select', 'MAC', 'Nombre']; descomentar para incluir casillas de selección por fila.
   displayedColumnsB: string[] = [ 'MAC', 'Nombre','Acciones'];
-  displayedColumnsP: string[] = [ 'Identificador', 'Rol','Acciones'];
+  displayedColumnsP: string[] = [ 'Identificador', 'Rol'];
   //dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   //selection = new SelectionModel<PeriodicElement>(true, []);
   
@@ -118,12 +117,12 @@ export class DispositivosComponent implements OnInit {
     this.rdata.setParticipante(this.formP.value);
   }
 
-  editB(id:string){
-    this.popUpEdit.open(EditElementComponent);
+  borrarB(id:string){
     console.log(id);
+    this.rdata.deleteBeacon(id)
     
   }
-  editP(id:string){
+  borrarP(id:string){
     console.log(id);
   }
 

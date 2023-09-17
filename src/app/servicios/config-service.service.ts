@@ -114,6 +114,21 @@ export class ConfigServiceService {
     })
   }
 
+  deleteBeacon(id:string){
+    let docId="";
+    return this.fs.collection('beacons',e=>e.where('MAC','==',id)).get().subscribe(qP=>{
+      qP.forEach(p=>{
+        docId=p.id;
+        this.fs.collection('beacons').doc(docId).delete().then(()=>{
+          console.log('Beacon eliminado');
+        
+        }).catch((err)=>{
+          console.log('No se pudo eliminar..',err)
+        })
+      })
+    })
+  }
+
   editElement(id:string,elemt:number){
     let docId="";
 

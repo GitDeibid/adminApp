@@ -1,16 +1,18 @@
-<div>
-  <ngx-charts-bar-horizontal-stacked
-  [view]="view"
-  scheme="cool"
-  [results]="data_g"
-  [gradient]="gradient"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [legend]="showLegend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  (select)="onSelect($event)">
-</ngx-charts-bar-horizontal-stacked>
+<div class="contenedor-grafico">
+  <div>
+    <ngx-charts-bar-horizontal-stacked
+    [view]="view"
+    scheme="cool"
+    [results]="data_g"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    (select)="onSelect($event)">
+  </ngx-charts-bar-horizontal-stacked>
+  </div>
 </div>

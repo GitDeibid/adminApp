@@ -40,7 +40,6 @@ import { AddRolComponent } from './componentes/configuracion/add-rol/add-rol.com
 import { ResultadosComponent } from './componentes/resultados/resultados.component';
 import { DispositivosComponent } from './componentes/dispositivos/dispositivos.component';
 import { GraficosComponent } from './componentes/graficos/graficos.component';
-import { EditElementComponent } from './componentes/dispositivos/edit-element/edit-element.component';
 
 
 @NgModule({
@@ -55,7 +54,6 @@ import { EditElementComponent } from './componentes/dispositivos/edit-element/ed
     DispositivosComponent,
     GraficosComponent,
     AddRolComponent,
-    EditElementComponent
    ],
    entryComponents:[AddExperimentoComponent],
   imports: [

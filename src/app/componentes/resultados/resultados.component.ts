@@ -32,6 +32,7 @@ export class ResultadosComponent implements OnInit,AfterViewInit {
   results!:any[];
   //dataR!:MatTableDataSource<any>;
   dataR = new MatTableDataSource<resultado>([]);
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit(){
@@ -83,22 +84,30 @@ export class ResultadosComponent implements OnInit,AfterViewInit {
   Buscar(){
     
     console.log(this.selectRol,this.selectIns);
-    this.rdata.getParticipante
+    /* this.rdata.getParticipante
     this.rdata.getResultados(this.selectRol,this.selectIns).subscribe(res=>{
       console.log(res[0]);
       this.results=res;
       this.dataR= new MatTableDataSource<resultado>(this.results);
       this.dataR.paginator=this.paginator;  
       
-    })
+    }) */
     
   }
 
   exportToExcel(){
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.dataR.data);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, this.selectIns+'_'+this.selectRol);
+    //Obtener resultados.
+    this.rdata.getResultados(this.selectRol,this.selectIns).subscribe(res=>{
+      console.log(res[0]);
+      this.results=res;
+      //this.dataR= new MatTableDataSource<resultado>(this.results);
+      //this.dataR.paginator=this.paginator;  
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.results);
+      const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, this.selectIns+'_'+this.selectRol);
+    })
+    
   }
 
   private saveAsExcelFile(buffer: any, fileName: string): void {

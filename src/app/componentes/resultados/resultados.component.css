@@ -6,4 +6,6 @@ table {
 .contenedor-tabla{
   display: grid;
   place-content: center;
+  padding-top: 50px;
+  padding-bottom: 150px;
 }
