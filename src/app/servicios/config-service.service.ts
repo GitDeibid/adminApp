@@ -24,8 +24,9 @@ export class ConfigServiceService {
   getConfig():Observable<any>{
     return this.fs.collection('configuracion').doc('general').snapshotChanges();
   }
-  setConfig(duracion:String,freq:String,name:String,dins:String){
-    return this.fs.collection('configuracion').doc('general').set({duracionScaner:duracion,frequency:freq,nombre:name,duracionIns:dins});
+  //setConfig(duracion:String,freq:String,name:String,dins:String){
+  setConfig(freq:String,name:String){
+    return this.fs.collection('configuracion').doc('general').set({frequency:freq,nombre:name});
   }
   
   getIns():Observable<Ins[]>{
@@ -34,7 +35,7 @@ export class ConfigServiceService {
   }
 
   setIns(nombre:String){
-    return this.fs.collection('instancias').doc(undefined).set({Nombre:nombre});
+    return this.fs.collection('instancias').doc(undefined).set({Nombre:nombre,inicio:"",fin:""});
   }
 
   getBeacon(){

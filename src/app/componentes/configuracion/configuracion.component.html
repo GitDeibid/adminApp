@@ -19,26 +19,28 @@
                 <div class="card-header">
                   Configuración de la aplicación
                 </div>
-                <div class="card-body text-bg-secondary">                  
+                <div class="card-body text-bg-secondary">   
+                  <!--               
                     <div>
                       Duración del escaner
                       <mat-form-field>
                         <mat-label>Duración (Segundos)</mat-label>
                         <mat-select class="text-center" [(value)]="tEscaner" formGroupName="tiempoEscaner">
                           <mat-option *ngFor="let teo of tEscanerOptions" [value]=teo>{{teo}} segundos</mat-option>
-                            <!--<mat-option value="10">10 segundos</mat-option>
+                            <mat-option value="10">10 segundos</mat-option>
                             <mat-option value="15">15 segundoss</mat-option>
                             <mat-option value="20">20 segundoss</mat-option>
-                            <mat-option value="25">25 segundoss</mat-option>-->
+                            <mat-option value="25">25 segundoss</mat-option>
                         </mat-select>
                       </mat-form-field>
                     </div>
+                  -->
                     <div>
                       Frecuencia del escaner
                       <mat-form-field>                      
-                        <mat-label>Frec. (Minutos)</mat-label>
+                        <mat-label>Frec. (Segundos)</mat-label>
                         <mat-select class="text-center" [(value)]="fEscaner" formGroupName="frecEscaner">
-                            <mat-option *ngFor="let feo of fEscanerOptions" [value]=feo>{{feo}} minutos</mat-option>
+                            <mat-option *ngFor="let feo of fEscanerOptions" [value]=feo>{{feo}} segundos</mat-option>
                             <!--<mat-option value="1">1 minuto</mat-option>
                             <mat-option value="2">2 minutos</mat-option>
                             <mat-option value="3">3 minutos</mat-option>
@@ -55,7 +57,8 @@
                             <mat-option *ngFor="let ddl of ddlColection" [value]=ddl.Nombre>{{ddl.Nombre}}</mat-option>                            
                         </mat-select>
                       </mat-form-field>
-                    </div>                    
+                    </div> 
+                    <!--                   
                     <div>
                       <div>
                         Seleccionar Duración Instancia
@@ -66,7 +69,8 @@
                           </mat-select>
                         </mat-form-field>
                       </div>                                          
-                    </div>                                                
+                    </div>
+                    -->                                                
                 </div>
                 <div class="card-footer text-muted">
                   <button class="btn btn-primary" type="submit">Actualizar</button><!--Colocar si los datos se han guardado con exito o no(error)-->
@@ -82,15 +86,16 @@
                 <mat-card-title>Configuracion Actual</mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                
+                <!--
                 Duracion del escaner: {{dur_escan_conf}}
-                <mat-divider></mat-divider>
+                <mat-divider></mat-divider>-->
                 Frecuencia del escaner: {{frec_conf}}
                 <mat-divider></mat-divider>
                 Instancia: {{coleccion_conf}}
                 <mat-divider></mat-divider>
+                <!--
                 Duracion instancia: {{duracion_conf}}
-                <mat-divider></mat-divider>
+                <mat-divider></mat-divider>-->
 
               </mat-card-content>
               <mat-card-footer>

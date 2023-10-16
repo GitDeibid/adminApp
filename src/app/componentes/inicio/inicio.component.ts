@@ -25,7 +25,13 @@ export class InicioComponent implements OnInit {
   settings!:sett;
   tiempo:number= 300000;
   progreso:number=0;
-  exe:any;
+  
+  //Cronometro
+  displayTime: string = '00:00:00';
+  isRunning: boolean = false;
+  startTime: number=0;
+  intervalId: any;
+
   
   constructor(private service:PrincipalServicesService, private router:Router, private config:ConfigServiceService) { 
     this.formEscaner=new FormGroup({
@@ -52,7 +58,8 @@ export class InicioComponent implements OnInit {
       var time = parseInt(this.settings.duracionIns,10);
       console.log(time*60000);
       this.tiempo=time*60000
-      this.service.runEscaner();
+
+      this.service.runEscaner(this.settings.nombre);//Se necesita la ID de la instancia y no el nombre.
       this.mostrar();
       setTimeout(this.ocultar,this.tiempo);   
     });
@@ -62,9 +69,10 @@ export class InicioComponent implements OnInit {
 
   Detener(){
     console.log("Detener escaner");
-    this.service.stopEscaner();
+    this.service.stopEscaner(this.settings.nombre);
     this.ocultar();
-    clearInterval(this.exe);
+    //clearInterval(this.exe);
+    this.stopChronometer();
   }
 
   obtenerConfig(){
@@ -77,7 +85,7 @@ export class InicioComponent implements OnInit {
 
   mostrar(){    
     document.getElementById('spinner')!.style.display='inline';
-    this.progreso=0;
+    /*this.progreso=0;
     this.progreso+=1
     this.exe = setInterval(()=>{
       this.progreso+=1
@@ -87,14 +95,39 @@ export class InicioComponent implements OnInit {
         clearInterval(this.exe);
         this.service.stopEscaner();
       }
-    },(this.tiempo)/100);
+    },(this.tiempo)/100);*/
+
+    this.startChronometer();
+
   }
 
   ocultar(){
     document.getElementById('spinner')!.style.display='none';
   }
 
-  avance(){
-    this.progreso+=1
+  startChronometer() {
+    if (!this.isRunning) {
+      this.startTime = Date.now() - (this.startTime || 0);
+      console.log(this.startTime);
+      this.intervalId = setInterval(() => {
+        this.displayTime = this.formatTime(Date.now() - this.startTime);
+      }, 10);
+      this.isRunning = true;
+    }
+
   }
+
+  stopChronometer() {
+    if (this.isRunning) {
+      clearInterval(this.intervalId);
+      this.isRunning = false;
+      this.displayTime='00:00:00';      
+    }
+  }
+
+  formatTime(milliseconds: number): string {
+    const date = new Date(milliseconds);
+    return date.toISOString().substring(19,12);
+  }
+
 }

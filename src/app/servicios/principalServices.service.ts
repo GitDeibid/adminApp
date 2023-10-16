@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class PrincipalServicesService {
   isLogIn=true;
+  startTime:String="";
+  endTime:String="";
   constructor(private auth:Auth, private fs:AngularFirestore) { }
 
   register({correo, pass}:any){
@@ -32,11 +34,32 @@ export class PrincipalServicesService {
     return signOut(this.auth);
   }
 
-  runEscaner(){
+  runEscaner(insId:string){
+    let docID ="";
+    this.startTime=this.getActualTime();
+    this.fs.collection('instancias',ref=>ref.where('Nombre','==',insId)).get().subscribe(dI=>{
+      dI.forEach(d=>{
+        docID=d.id;       
+        /*time = d.get('inicio');
+        if(time==""){
+          this.fs.collection('instancias').doc(docID).update({inicio:this.startTime});//Actualizar el tiempo de inicio del experimento
+        }   */
+        this.fs.collection('instancias').doc(docID).update({inicio:this.startTime});//Actualizar el tiempo de inicio del experimento
+      });
+    });
+    
     return this.fs.collection('escaner').doc('estado').set({iniciado:true});
   }
 
-  stopEscaner(){
+  stopEscaner(insId:string){
+    let docID ="";
+    this.endTime=this.getActualTime();
+    this.fs.collection('instancias',ref=>ref.where('Nombre','==',insId)).get().subscribe(dI=>{
+      dI.forEach(d=>{
+        docID=d.id;
+          this.fs.collection('instancias').doc(docID).update({fin:this.endTime});//Actualizar el tiempo de inicio del experimento
+      });
+    });
     return this.fs.collection('escaner').doc('estado').set({iniciado:false});
   }
 
@@ -47,6 +70,28 @@ export class PrincipalServicesService {
   isAuthenticated() {
     console.log(this.isLogIn);
     return this.isLogIn;
+  }
+
+  getActualTime():String{
+    // Obtener la fecha y hora actual
+    const fechaHoraActual: Date = new Date();
+
+    // Obtener la hora, minuto y segundo
+    const hora: number = fechaHoraActual.getHours();
+    const minuto: number = fechaHoraActual.getMinutes();
+    const segundo: number = fechaHoraActual.getSeconds();
+
+    // Formatear la hora, minuto y segundo a dos dígitos
+    const hh: string = hora.toString().padStart(2, '0');
+    const mm: string = minuto.toString().padStart(2, '0');
+    const ss: string = segundo.toString().padStart(2, '0');
+
+    // Crear una cadena en formato "hh:mm:ss"
+    const horaActual: string = `${hh}:${mm}:${ss}`;
+
+    //console.log(horaActual);
+    return horaActual;
+
   }
 
 }

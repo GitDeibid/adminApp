@@ -28,9 +28,9 @@ export class ConfiguracionComponent implements OnInit {
   ffNombre!:String;
   dIns!:String;
   selecColeccion!:string;
-  tEscanerOptions:string[] = ['10','30','50','90']//Parámetros entregados en segundos multiplicado spor 1000 en la app.
-  fEscanerOptions:string[] = ['1','2','3','4','5']
-  dInsOptions:string[] = ['5','10','15','20']
+  //tEscanerOptions:string[] = ['3','7','11','13']//Parámetros entregados en segundos multiplicado spor 1000 en la app.
+  fEscanerOptions:string[] = ['5','10','15','20','25']//segundos.
+  //dInsOptions:string[] = ['5','10','15','20']
   ddlColection!:Ins[]
   prueba!:Ins
   faIcon1=faSquarePlus;
@@ -52,10 +52,10 @@ export class ConfiguracionComponent implements OnInit {
     public config:ConfigServiceService, dialog:MatDialog
   ) {
     this.formSetting = new FormGroup({
-      tiempoEscaner: new FormControl(),
+      //tiempoEscaner: new FormControl(),
       frecEscaner: new FormControl(),
       Coleccion: new FormControl(),
-      duracionIns: new FormControl()
+      //duracionIns: new FormControl()
 
     })
     this.dia=dialog;
@@ -82,21 +82,15 @@ export class ConfiguracionComponent implements OnInit {
     })
 
     this.config.getConfig().subscribe(c=>{
-      this.dur_escan_conf=c.payload.data()['duracionScaner'];
       this.frec_conf=c.payload.data()['frequency'];
       this.coleccion_conf=c.payload.data()['nombre'];
-      this.duracion_conf=c.payload.data()['duracionIns'];
 
-      console.log(c.payload.data()['duracionScaner']);
     })   
   }
 
   Actualizar(){
     //console.log(this.tEscaner,this.fEscaner, this.selecColeccion);
-    this.config.setConfig(this.tEscaner,this.fEscaner, this.selecColeccion,this.dIns);
-    this.config.getConfig().subscribe(data=>{//Obtiene el valor de la configuración al momento de cambiar en firestore.
-      //console.log(data.payload.data()['duracionScaner']);
-    })
+    this.config.setConfig(this.fEscaner, this.selecColeccion);
     
   }
 
