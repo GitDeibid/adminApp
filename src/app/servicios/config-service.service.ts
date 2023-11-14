@@ -10,6 +10,7 @@ import { Ins } from '../models/experimento';
 export class ConfigServiceService {
 
   Ins:Observable<any>;
+  InsOne:Observable<any>;  
   beacon:Observable<any>;
   participante:Observable<any>;
   MAC!:string;
@@ -30,8 +31,12 @@ export class ConfigServiceService {
   }
   
   getIns():Observable<Ins[]>{
-
     return this.Ins;
+  }
+
+  getOneIns(name:string){    
+    this.InsOne=this.fs.collection('instancias', ref=>ref.where('Nombre','==',name)).valueChanges();
+    return this.InsOne;
   }
 
   setIns(nombre:String){
@@ -57,7 +62,9 @@ export class ConfigServiceService {
   }
 
   getResultados(dispositivo:string,instancia:string){
-    return this.fs.collection('registros').doc(dispositivo).collection(instancia).valueChanges();
+    //Devolver resultados ordenados por fecha.
+    return this.fs.collection('Test').doc(dispositivo).collection(instancia,r=>r.orderBy("Fecha","asc")).valueChanges();
+
   }
 
   getRoles(){

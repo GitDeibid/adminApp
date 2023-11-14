@@ -1,9 +1,12 @@
+
+
+<button mat-raised-button  (click)="graficar()">Visualizar</button>
 <div class="contenedor-grafico">
   <div>
     <ngx-charts-bar-horizontal-stacked
     [view]="view"
     scheme="cool"
-    [results]="data_g"
+    [results]="data_t"
     [gradient]="gradient"
     [xAxis]="showXAxis"
     [yAxis]="showYAxis"
@@ -13,6 +16,22 @@
     [xAxisLabel]="xAxisLabel"
     [yAxisLabel]="yAxisLabel"
     (select)="onSelect($event)">
-  </ngx-charts-bar-horizontal-stacked>
+    </ngx-charts-bar-horizontal-stacked>
+  </div>
+  <br><br>
+  <div class="contenedor-grafico">
+    <ngx-charts-polar-chart
+    [view]="view"
+    scheme="cool"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [xAxisLabel]="xAxisLabel2"
+    [yAxisLabel]="yAxisLabel2"
+    [results]="data_q"
+    (select)="onSelect($event)">
+    </ngx-charts-polar-chart>
   </div>
 </div>
